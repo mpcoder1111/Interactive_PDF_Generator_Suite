@@ -1,0 +1,31 @@
+# =========================================================================
+# Schema-Driven Interactive PDF Form Suite — .gitignore
+# =========================================================================
+
+# Python compiled files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Application generated outputs (do not version generated PDFs or Excel reports)
+Interactive_PDF/
+logs/
+
+# Test / scratch data
+testing/
+
+# PyInstaller build artifacts
+dist/
+build/
+*.spec
+
+# Common IDE and OS files
+.venv/
+.env
+.idea/
+.vscode/
+.claude/
+*.DS_Store
+Thumbs.db
+desktop.ini

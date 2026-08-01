@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Schema-Driven PDF Engine — User Guide v1.0</title>
+    <meta name="description" content="Complete user guide for the Schema-Driven Interactive Fillable PDF Form Suite and Data Consolidator. Covers all GUI tabs, field types, comparison matrix, and advanced features.">
+    <style>
+        :root {
+            --primary: #1F4E78;
+            --primary-dark: #143451;
+            --accent: #0066CC;
+            --bg: #F4F6F9;
+            --card-bg: #FFFFFF;
+            --text-main: #2C3E50;
+            --text-muted: #595959;
+            --border: #DDEBF7;
+            --success: #006100;
+            --success-bg: #C6EFCE;
+            --generic-purple: #4A154B;
+            --feature-amber: #7B5800;
+            --feature-amber-bg: #FFF8E1;
+            --compare-no: #C0392B;
+            --compare-yes: #27AE60;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg);
+            color: var(--text-main);
+            line-height: 1.6;
+            padding-bottom: 50px;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: #FFFFFF;
+            padding: 35px 20px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+        }
+
+        header h1 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+        }
+
+        header p {
+            font-size: 1.1rem;
+            color: #DDEBF7;
+            font-style: italic;
+        }
+
+        header .version-badge {
+            display: inline-block;
+            margin-top: 12px;
+            background: rgba(255,255,255,0.15);
+            border: 1px solid rgba(255,255,255,0.35);
+            border-radius: 20px;
+            padding: 4px 16px;
+            font-size: 0.85rem;
+            color: #DDEBF7;
+            letter-spacing: 0.5px;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        /* TOC */
+        .toc {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-left: 5px solid var(--primary);
+            border-radius: 10px;
+            padding: 20px 30px;
+            margin-bottom: 30px;
+        }
+
+        .toc h3 {
+            color: var(--primary);
+            font-size: 1.05rem;
+            margin-bottom: 10px;
+        }
+
+        .toc ol {
+            margin-left: 20px;
+        }
+
+        .toc li {
+            margin-bottom: 5px;
+        }
+
+        .toc a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        .toc a:hover {
+            text-decoration: underline;
+        }
+
+        .generic-banner {
+            background: linear-gradient(135deg, #F4E8F5 0%, #E8D4EB 100%);
+            border: 2px solid #8A2BE2;
+            border-radius: 10px;
+            padding: 20px 25px;
+            margin-bottom: 25px;
+            color: var(--generic-purple);
+        }
+
+        .generic-banner h3 {
+            font-size: 1.25rem;
+            color: var(--generic-purple);
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 10px;
+            padding: 25px 30px;
+            margin-bottom: 25px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            border: 1px solid var(--border);
+        }
+
+        .card h2 {
+            font-size: 1.4rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .card p {
+            margin-bottom: 15px;
+            color: var(--text-main);
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 3px 8px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            border-radius: 4px;
+            background-color: var(--border);
+            color: var(--primary-dark);
+        }
+
+        .badge.success {
+            background-color: var(--success-bg);
+            color: var(--success);
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 15px;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 18px;
+            margin-top: 15px;
+        }
+
+        @media (max-width: 900px) {
+            .grid-3 { grid-template-columns: 1fr 1fr; }
+        }
+
+        @media (max-width: 768px) {
+            .grid-2, .grid-3 { grid-template-columns: 1fr; }
+        }
+
+        .tab-box {
+            background-color: #FAFAFA;
+            border: 1px solid #E2E8F0;
+            border-left: 4px solid var(--primary);
+            padding: 15px 20px;
+            border-radius: 6px;
+            margin-bottom: 12px;
+        }
+
+        .tab-box h4 {
+            color: var(--primary);
+            font-size: 1.1rem;
+            margin-bottom: 6px;
+        }
+
+        .benefit-box {
+            background-color: #F8FAFC;
+            border: 1px solid #E2E8F0;
+            border-left: 4px solid var(--accent);
+            padding: 15px 20px;
+            border-radius: 6px;
+        }
+
+        .benefit-box h4 {
+            color: var(--accent);
+            font-size: 1.1rem;
+            margin-bottom: 6px;
+        }
+
+        /* Core Features grid cards (About tab style) */
+        .feature-card {
+            background: var(--feature-amber-bg);
+            border: 1px solid #FFD54F;
+            border-left: 5px solid #F9A825;
+            border-radius: 8px;
+            padding: 18px 20px;
+        }
+
+        .feature-card .feature-icon {
+            font-size: 1.7rem;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .feature-card h4 {
+            color: var(--feature-amber);
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .feature-card p {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 0;
+        }
+
+        ol, ul {
+            margin-left: 25px;
+            margin-bottom: 15px;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        code {
+            background-color: #EDF2F7;
+            color: #C53030;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: Consolas, Monaco, monospace;
+            font-size: 0.9em;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+            margin-bottom: 15px;
+        }
+
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border: 1px solid #CBD5E0;
+        }
+
+        th {
+            background-color: var(--primary);
+            color: #FFFFFF;
+            font-weight: 600;
+        }
+
+        tr:nth-child(even) {
+            background-color: #F8FAFC;
+        }
+
+        /* Comparison table specific */
+        .cmp-yes { color: var(--compare-yes); font-weight: 700; }
+        .cmp-no  { color: var(--compare-no);  font-weight: 700; }
+        .cmp-partial { color: #E67E22; font-weight: 700; }
+        .cmp-col-our { background-color: #EAF4EA !important; }
+        th.cmp-col-our { background-color: #27AE60 !important; }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            border-top: 1px solid var(--border);
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>SCHEMA-DRIVEN INTERACTIVE PDF FORM SUITE</h1>
+        <p>End-User Operating Manual · Feature Architecture · Presentation Guide</p>
+        <span class="version-badge">📌 Version 1.0 — August 2026</span>
+    </header>
+
+    <div class="container">
+
+        <!-- TABLE OF CONTENTS -->
+        <div class="toc">
+            <h3>📚 Table of Contents</h3>
+            <ol>
+                <li><a href="#about">About This Software — Core Features</a></li>
+                <li><a href="#overview">Overview &amp; System Purpose</a></li>
+                <li><a href="#benefits">Key Advantages &amp; Functional Benefits</a></li>
+                <li><a href="#quickstart">Step-by-Step Quick Start Guide</a></li>
+                <li><a href="#tabs">GUI Tabs &amp; Features Explained</a></li>
+                <li><a href="#datatypes">Supported Field Datatypes &amp; Validation Operators</a></li>
+                <li><a href="#advanced">Advanced Interactive PDF Features</a></li>
+                <li><a href="#comparison">Category Feature Comparison Matrix</a></li>
+            </ol>
+        </div>
+
+        <!-- GENERIC SOFTWARE HIGHLIGHT BANNER -->
+        <div class="generic-banner">
+            <h3>🌐 Fully Generic &amp; Custom Configurable Software Engine</h3>
+            <p>This software is <strong>completely domain-agnostic and generic</strong>. Any organization, department, or team can design and generate their own custom interactive fillable PDF forms according to their specific requirements, field schemas, grid layouts, and validation rules — without writing a single line of code!</p>
+        </div>
+
+        <!-- SECTION 1: ABOUT / CORE FEATURES -->
+        <div class="card" id="about">
+            <h2>ℹ️ 1. About This Software — Core Features</h2>
+            <p>The following six pillars describe the key capabilities built into this suite. These are also displayed on the <strong>About</strong> tab when you launch the application.</p>
+
+            <div class="grid-3">
+                <div class="feature-card">
+                    <span class="feature-icon">📋</span>
+                    <h4>Schema-Driven Form Builder</h4>
+                    <p>Create interactive PDF forms from an Excel configuration template or an AI-generated JSON schema — no coding required.</p>
+                </div>
+                <div class="feature-card">
+                    <span class="feature-icon">🎨</span>
+                    <h4>Automatic Professional Layouts</h4>
+                    <p>Multi-column grid layouts, colour-coded themes, field validation, dropdown controls, and radio/checkbox groups generated automatically.</p>
+                </div>
+                <div class="feature-card">
+                    <span class="feature-icon">📝</span>
+                    <h4>Built-in Form Utilities</h4>
+                    <p>Generate form summaries inside the PDF, validate all entries on the fly, reset forms to a clean state, and lock completed forms with one click.</p>
+                </div>
+                <div class="feature-card">
+                    <span class="feature-icon">📊</span>
+                    <h4>Batch PDF Consolidation</h4>
+                    <p>Extract data from hundreds of completed PDFs in a selected folder and export a clean, formatted Excel consolidation report automatically.</p>
+                </div>
+                <div class="feature-card">
+                    <span class="feature-icon">🤖</span>
+                    <h4>AI-Ready Configuration</h4>
+                    <p>Generate complete form templates using any modern AI assistant and import them directly via the standard JSON schema format.</p>
+                </div>
+                <div class="feature-card">
+                    <span class="feature-icon">🔒</span>
+                    <h4>🔒 Offline &amp; Portable</h4>
+                    <p>No cloud, no database, no internet connection required. Runs as a secure standalone desktop application — your data never leaves your machine.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECTION 2: OVERVIEW -->
+        <div class="card" id="overview">
+            <h2>🚀 2. Overview &amp; System Purpose</h2>
+            <p>The <strong>Schema-Driven Interactive PDF Form Suite</strong> is a modern desktop application that enables users to design, generate, fill, and consolidate interactive fillable PDF forms without needing complex server setups or paid PDF editing software.</p>
+
+            <div class="grid-2">
+                <div class="tab-box">
+                    <h4>📝 Part A: Form Designer &amp; Compiler</h4>
+                    <p>Allows form administrators to easily configure form titles, headers, grid layouts (1 to 4 columns), section titles, and form fields in a simple graphical interface, compiling them into interactive PDF forms with 1 click.</p>
+                </div>
+                <div class="tab-box">
+                    <h4>📊 Part B: Batch PDF Data Consolidator</h4>
+                    <p>Scans folders containing completed PDF forms submitted by users, extracts all filled form field data automatically, and exports a clean, formatted Excel consolidation report.</p>
+                </div>
+            </div>
+
+            <p style="margin-top:15px;"><strong>Default sample form:</strong> The application ships with a ready-to-use <em>Employee Information Record</em> template covering fields like Full Name, Employee ID, Date of Birth, Phone, Email, Department (dropdown), Designation, Joining Date, Salary, Residential Address, and Emergency Contact — giving you an immediate working demonstration out of the box.</p>
+        </div>
+
+        <!-- SECTION 3: KEY ADVANTAGES -->
+        <div class="card" id="benefits">
+            <h2>💡 3. Key Advantages &amp; Functional Benefits of Interactive Fillable PDFs</h2>
+            <p>Interactive Fillable PDF forms streamline communication and data management across organizations:</p>
+
+            <div class="grid-2">
+                <div class="benefit-box">
+                    <h4>📋 Collect Information Easily in Structured Form</h4>
+                    <p>Enforces standard data entry with clear section headings, multi-column grid alignment, dropdown choices, and predefined field datatypes (numbers, dates, text) so information is always collected accurately.</p>
+                </div>
+
+                <div class="benefit-box">
+                    <h4>📊 Easy Data Segregation &amp; Consolidation</h4>
+                    <p>All filled PDF forms submitted by team members can be processed automatically. The Batch Consolidator extracts every field value and segregates data into a structured Excel spreadsheet at the click of a button.</p>
+                </div>
+
+                <div class="benefit-box">
+                    <h4>💻 No Extra Software Required for End Users</h4>
+                    <p>Form fillers only need a standard free PDF reader already installed on most computers. No expensive PDF editing licenses or database servers are required on the user's side!</p>
+                </div>
+
+                <div class="benefit-box">
+                    <h4>🚀 Easily Shareable &amp; Portable</h4>
+                    <p>Fillable PDF files are compact, self-contained, and can be shared effortlessly via email, OneDrive, SharePoint, or local network shared folders — no special infrastructure needed.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECTION 4: QUICK START GUIDE -->
+        <div class="card" id="quickstart">
+            <h2>⚡ 4. Step-by-Step Quick Start Operating Guide</h2>
+            <ol>
+                <li><strong>Launch Application:</strong> Double click <code>Interactive_PDF_Generator_Suite.exe</code> located in the <code>Interactive_PDF_Code</code> folder.</li>
+                <li><strong>Explore the About Tab:</strong> The first tab (<em>ℹ️ About</em>) displays the 6 Core Feature cards and quick-action buttons — a handy reference at any time.</li>
+                <li><strong>Configure Form Details:</strong> Switch to <em>Sheet 1 — Basic Form Details</em> to set your Form Title, Subtitle, Instructions, and initial Lock Status.</li>
+                <li><strong>Define Layout Sections:</strong> Use <em>Sheet 2 — Section Layouts</em> to add or edit form sections and assign 1 to 4 grid columns per section.</li>
+                <li><strong>Define Form Fields:</strong> Use <em>Sheet 3 — Field Configuration Schema</em> to configure labels, data types, default values, and choice dropdown options.</li>
+                <li><strong>Export &amp; Backup Configurations:</strong> Click <strong><code>💾 Export Config</code></strong> to save your current form configuration into a custom Excel backup file (e.g. <code>My_Form_Template.xlsx</code>) for safe-keeping or sharing.</li>
+                <li><strong>Import Existing Configurations:</strong> Click <strong><code>📂 Import Config</code></strong> to load any previously saved 3-sheet Excel template file directly into the GUI, or import an AI-generated JSON schema.</li>
+                <li><strong>Generate Fillable PDF Form:</strong> Click the primary button <strong><code>⚡ Create Fillable PDF Form</code></strong>. The PDF will be saved in <code>Interactive_PDF_Code/Interactive_PDF/</code> and automatically opened in your PDF reader.</li>
+                <li><strong>Consolidate Completed Forms:</strong> Switch to the <em>Batch PDF Data Consolidator</em> tab, select the folder containing filled PDFs, and click <strong><code>📊 Run Data Consolidation into Excel Report</code></strong>.</li>
+            </ol>
+        </div>
+
+        <!-- SECTION 5: GUI TABS EXPLAINED -->
+        <div class="card" id="tabs">
+            <h2>📑 5. GUI Tabs &amp; Features Explained</h2>
+
+            <div class="tab-box">
+                <h4>ℹ️ About (First Tab)</h4>
+                <p>Displays the 6 Core Feature cards with emoji icons and descriptions, providing a quick reference to the software's capabilities. Also contains shortcut buttons to open this Help Guide and the GitHub repository. <span class="badge">New in v1.0</span></p>
+            </div>
+
+            <div class="tab-box">
+                <h4>📋 Sheet 1: Basic Form Details</h4>
+                <p>Configures global header banners, instruction points (1–3), footer banner text, and default form lock status (<span class="badge">Locked</span>, <span class="badge">Unlocked</span>, or <span class="badge">Not Required</span>).</p>
+            </div>
+
+            <div class="tab-box">
+                <h4>📑 Sheet 2: Section Layouts &amp; Grid Columns</h4>
+                <p>Manages section layout architecture. <code>Section_ID</code> (e.g. <code>SEC_1</code>, <code>SEC_2</code>) is protected systematically. Users can customize section heading titles and assign 1 to 4 grid columns per section.</p>
+            </div>
+
+            <div class="tab-box">
+                <h4>⚙️ Sheet 3: Field Configuration Schema</h4>
+                <p>Data grid where all form fields are defined. <code>Field_ID</code> and <code>Section_ID</code> are protected to preserve data integrity. Edit labels, pure data types, default values, validation operators, parameter values, and choice dropdown options.</p>
+            </div>
+
+            <div class="tab-box">
+                <h4>📊 Batch PDF Data Consolidator</h4>
+                <p>Browse any target folder containing filled PDFs and extract form field data row-by-row into a formatted Excel report saved directly inside the target PDF folder.</p>
+            </div>
+
+            <div class="tab-box">
+                <h4>📄 Session Logs &amp; Diagnostics</h4>
+                <p>Displays a live dark-mode console output and provides a 1-click button to open session log files (<code>logs/log_YYYYMMDD_HHMMSS.txt</code>) for troubleshooting.</p>
+            </div>
+        </div>
+
+        <!-- SECTION 6: SUPPORTED FIELD DATATYPES -->
+        <div class="card" id="datatypes">
+            <h2>🔢 6. Supported Field Datatypes &amp; Validation Operators</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Field DataType</th>
+                        <th>Allowed Validation Operators</th>
+                        <th>Description &amp; Format Rules</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>short_text</strong></td>
+                        <td><code>none</code>, <code>min_length</code>, <code>max_length</code></td>
+                        <td>Single-line text entry field.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>long_text</strong></td>
+                        <td><code>none</code>, <code>min_length</code>, <code>max_length</code></td>
+                        <td>Multi-line scrollable text area for summaries or progress narratives.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>whole_number</strong></td>
+                        <td><code>none</code>, <code>=</code>, <code>&lt;</code>, <code>&gt;</code>, <code>&lt;=</code>, <code>&gt;=</code>, <code>in_range</code>, <code>out_range</code></td>
+                        <td>Integer numbers only (e.g. 10, 45).</td>
+                    </tr>
+                    <tr>
+                        <td><strong>decimal</strong></td>
+                        <td><code>none</code>, <code>=</code>, <code>&lt;</code>, <code>&gt;</code>, <code>&lt;=</code>, <code>&gt;=</code>, <code>in_range</code>, <code>out_range</code></td>
+                        <td>Floating-point decimal numbers (e.g. 150.5, 2.75).</td>
+                    </tr>
+                    <tr>
+                        <td><strong>date</strong></td>
+                        <td><code>none</code>, <code>date_ddmmyyyy</code>, <code>=</code>, <code>&lt;</code>, <code>&gt;</code>, <code>&lt;=</code>, <code>&gt;=</code>, <code>in_range</code></td>
+                        <td>Date entries formatted strictly as <code>DD-MM-YYYY</code>.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>choice</strong></td>
+                        <td><code>none</code></td>
+                        <td>Interactive PDF dropdown choice menu. Options entered as comma-separated values (e.g. <code>Option 1, Option 2, Option 3</code>).</td>
+                    </tr>
+                    <tr>
+                        <td><strong>multi_choice</strong></td>
+                        <td><code>none</code></td>
+                        <td>Multi-select Checkboxes <code>[ ]</code> allowing form fillers to check 1, 2, 3, or all options simultaneously. Summarized as comma-separated labels or <code>NIL</code>.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>radio_choice</strong></td>
+                        <td><code>none</code></td>
+                        <td>Mutually Exclusive Radio Buttons <code>( )</code> for quick single-select choices (e.g. <code>Yes, No</code>). Summarized as chosen label or <code>NIL</code>.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- SECTION 7: ADVANCED PDF FEATURES -->
+        <div class="card" id="advanced">
+            <h2>✨ 7. Advanced Interactive PDF Features</h2>
+            <ul>
+                <li><strong>Live Summary Generator:</strong> Inspects all 8 data types live inside a PDF Reader when clicking <code>&gt;&gt;&gt;&gt; Click the Button To Generate Summary &lt;&lt;&lt;&lt;</code>. Outputs clean <code>Label: Option A, Option B</code> or <code>NIL</code> for empty/unselected fields.</li>
+                <li><strong>Form Locking/Unlocking:</strong> Built-in button controls dynamically lock or unlock all textboxes, comboboxes, checkboxes, and radio buttons to prevent accidental modifications after completion.</li>
+                <li><strong>Clear Form (Reset):</strong> Resets text fields, dropdowns, checkboxes, and radio buttons back to clean initial states (evaluating to <code>NIL</code> in summary).</li>
+                <li><strong>Mandatory System Instructions:</strong> System-locked red instruction points explicitly warn users to click 'Generate Summary' before saving and emailing PDFs.</li>
+                <li><strong>Standard AcroForm Compatibility:</strong> Native AcroForm compatibility ensures reliable data extraction during batch consolidation, regardless of PDF reader software used.</li>
+                <li><strong>AI-Ready JSON Import:</strong> Any AI assistant (ChatGPT, Gemini, Copilot, etc.) can generate the standard JSON schema, which is directly importable into the GUI — enabling rapid form prototyping.</li>
+                <li><strong>Centered Action Buttons:</strong> Button labels (Generate Summary, Reset Form, Lock/Unlock) are mathematically centered using font-metric calculations so they render correctly in all PDF readers. <span class="badge success">Fixed in v1.0</span></li>
+            </ul>
+        </div>
+
+        <!-- SECTION 8: COMPARISON MATRIX -->
+        <div class="card" id="comparison">
+            <h2>📊 8. Category Feature Comparison Matrix</h2>
+            <p>How this Schema-Driven PDF Engine compares to other tool categories — without any brand or trademark dependencies:</p>
+            <div style="overflow-x: auto;">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Capability</th>
+                            <th>Commercial Paid PDF Suites</th>
+                            <th>General Open-Source Office Tools</th>
+                            <th>Cloud / Web Form Builders</th>
+                            <th class="cmp-col-our">Schema-Driven PDF Engine (This Tool)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>GUI-based form designer (no coding)</td>
+                            <td class="cmp-yes">✔ Yes</td>
+                            <td class="cmp-partial">⚡ Limited</td>
+                            <td class="cmp-yes">✔ Yes</td>
+                            <td class="cmp-col-our cmp-yes">✔ Yes</td>
+                        </tr>
+                        <tr>
+                            <td>Generic Excel / JSON schema as form input</td>
+                            <td class="cmp-no">✘ No</td>
+                            <td class="cmp-no">✘ No</td>
+                            <td class="cmp-no">✘ No</td>
+                            <td class="cmp-col-our cmp-yes">✔ Yes</td>
+                        </tr>
+                        <tr>
+                            <td>Interactive AcroForm PDF generation</td>
+                            <td class="cmp-yes">✔ Yes</td>
+                            <td class="cmp-partial">⚡ Partial</td>
+                            <td class="cmp-partial">⚡ Varies</td>
+                            <td class="cmp-col-our cmp-yes">✔ Yes</td>
+                        </tr>
+                        <tr>
+                            <td>Multi-column automatic grid layouts</td>
+                            <td class="cmp-partial">⚡ Manual</td>
+                            <td class="cmp-no">✘ No</td>
+                            <td class="cmp-partial">⚡ Limited</td>
+                            <td class="cmp-col-our cmp-yes">✔ Automatic (1–4 cols)</td>
+                        </tr>
+                        <tr>
+                            <td>Built-in field validation rules</td>
+                            <td class="cmp-yes">✔ Yes</td>
+                            <td class="cmp-no">✘ No</td>
+                            <td class="cmp-yes">✔ Yes</td>
+                            <td class="cmp-col-our cmp-yes">✔ Yes (8 types)</td>
+                        </tr>
+                        <tr>
+                            <td>Summary generation inside the PDF</td>
+                            <td class="cmp-no">✘ No</td>
+                            <td class="cmp-no">✘ No</td>
+                            <td class="cmp-no">✘ No</td>
+                            <td class="cmp-col-our cmp-yes">✔ Yes</td>
+                        </tr>
+                        <tr>
+                            <td>Form lock / unlock support</td>
+                            <td class="cmp-partial">⚡ Partial</td>
+                            <td class="cmp-no">✘ No</td>
+                            <td class="cmp-no">✘ No</td>
+                            <td class="cmp-col-our cmp-yes">✔ Yes</td>
+                        </tr>
+                        <tr>
+                            <td>Batch extraction from multiple completed PDFs</td>
+                            <td class="cmp-partial">⚡ With add-ons</td>
+                            <td class="cmp-no">✘ No</td>
+                            <td class="cmp-partial">⚡ Cloud-only</td>
+                            <td class="cmp-col-our cmp-yes">✔ Yes — bulk Excel export</td>
+                        </tr>
+                        <tr>
+                            <td>AI-generated JSON schema import</td>
+                            <td class="cmp-no">✘ No</td>
+                            <td class="cmp-no">✘ No</td>
+                            <td class="cmp-partial">⚡ Some platforms</td>
+                            <td class="cmp-col-our cmp-yes">✔ Yes — native support</td>
+                        </tr>
+                        <tr>
+                            <td>100% offline — no cloud / internet required</td>
+                            <td class="cmp-partial">⚡ Mostly</td>
+                            <td class="cmp-yes">✔ Yes</td>
+                            <td class="cmp-no">✘ No (cloud-based)</td>
+                            <td class="cmp-col-our cmp-yes">✔ Yes — fully offline</td>
+                        </tr>
+                        <tr>
+                            <td>Single executable — no installation required</td>
+                            <td class="cmp-no">✘ No</td>
+                            <td class="cmp-no">✘ No</td>
+                            <td class="cmp-no">✘ No</td>
+                            <td class="cmp-col-our cmp-yes">✔ Yes — portable .exe</td>
+                        </tr>
+                        <tr>
+                            <td>Open-source / MIT License</td>
+                            <td class="cmp-no">✘ No (Proprietary)</td>
+                            <td class="cmp-yes">✔ Yes</td>
+                            <td class="cmp-no">✘ No (SaaS)</td>
+                            <td class="cmp-col-our cmp-yes">✔ Yes — MIT License</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p style="font-size:0.88rem; color: var(--text-muted); margin-top:5px;">
+                ✔ = Fully Supported &nbsp;|&nbsp; ⚡ = Partial / Conditional &nbsp;|&nbsp; ✘ = Not Supported.
+                Category names are intentionally generic to avoid trademark dependencies.
+            </p>
+        </div>
+
+    </div>
+
+    <footer>
+        <p>Schema-Driven Interactive PDF Form Suite &copy; 2026 &nbsp;|&nbsp; Version 1.0 &nbsp;|&nbsp; MIT License &nbsp;|&nbsp; Generic &amp; Offline Standalone Application</p>
+    </footer>
+
+</body>
+</html>

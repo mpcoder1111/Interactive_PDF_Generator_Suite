@@ -1,0 +1,13 @@
+# =========================================================================
+# Schema-Driven Interactive PDF Form Suite — Developer Requirements
+# =========================================================================
+# Additional dependencies required ONLY when building the standalone .exe.
+# End users running from Python source do NOT need this file.
+#
+# Install with:  pip install -r requirements-dev.txt
+# Build exe with: python build_exe.py
+# =========================================================================
+
+# PyInstaller — Packages Python app into a standalone Windows executable
+# License: GPL-2.0 with Bootloader Exception (permits distributing the .exe under MIT)
+pyinstaller>=6.0.0

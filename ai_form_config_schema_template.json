@@ -1,0 +1,75 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Interactive Fillable PDF Form Configuration Schema",
+    "description": "Supply this exact pure JSON schema contract to any AI model (ChatGPT, Claude, Gemini, DeepSeek) to generate custom valid form configurations for the Interactive PDF Suite.",
+    "type": "object",
+    "required": [
+        "form_settings",
+        "section_rows",
+        "field_schema_rows"
+    ],
+    "properties": {
+        "form_settings": {
+            "type": "object",
+            "description": "Global form basic details, theme colors, instructions, and summary section labels.",
+            "required": [
+                "Form_Title",
+                "Form_Subtitle",
+                "Instruction_Point_2",
+                "Footer_Text",
+                "Default_Lock_Status",
+                "Theme_Navy_Primary",
+                "Theme_Soft_Blue",
+                "Theme_Soft_Yellow",
+                "Summary_Section_Title",
+                "Summary_Field_Label"
+            ],
+            "properties": {
+                "Form_Title": { "type": "string", "maxLength": 60, "description": "Form title displayed on PDF line 1" },
+                "Form_Subtitle": { "type": "string", "maxLength": 85, "description": "Form subtitle displayed on PDF line 2" },
+                "Instruction_Point_1": { "type": "string", "maxLength": 180, "description": "Optional in JSON. System-managed mandatory red save rule (auto-injected if omitted)" },
+                "Instruction_Point_2": { "type": "string", "maxLength": 180, "description": "Instruction point 2 text (Before saving click Generate Summary)" },
+                "Instruction_Point_3": { "type": "string", "maxLength": 180, "description": "Instruction point 3 (Optional)" },
+                "Footer_Text": { "type": "string", "maxLength": 110, "description": "Page footer banner text" },
+                "Default_Lock_Status": { "type": "string", "enum": ["Locked", "Unlocked", "Not Required"] },
+                "Theme_Navy_Primary": { "type": "string", "pattern": "^#[0-9A-Fa-f]{6}$", "default": "#1F4E78" },
+                "Theme_Soft_Blue": { "type": "string", "pattern": "^#[0-9A-Fa-f]{6}$", "default": "#DDEBF7" },
+                "Theme_Soft_Yellow": { "type": "string", "pattern": "^#[0-9A-Fa-f]{6}$", "default": "#FFF2CC" },
+                "Summary_Section_Title": { "type": "string", "maxLength": 110, "description": "Summary section header title" },
+                "Summary_Button_Text": { "type": "string", "maxLength": 110, "default": ">>>> Click the Button To Generate Summary <<<<", "description": "Optional in JSON. System-managed button text" },
+                "Summary_Field_Label": { "type": "string", "maxLength": 110, "description": "Summary output text label" }
+            }
+        },
+        "section_rows": {
+            "type": "array",
+            "description": "List of form layout section tuples: [Section_Number, Section_ID, Section_Heading_Title, Layout_Grid_Columns]",
+            "items": {
+                "type": "array",
+                "items": [
+                    { "type": "integer", "description": "Section Number (1, 2, 3, 4...)" },
+                    { "type": "string", "description": "Section ID (SEC_1, SEC_2, SEC_3...)" },
+                    { "type": "string", "description": "Section Heading Title" },
+                    { "type": "string", "enum": ["1", "2", "3", "4"], "description": "Layout Grid Columns (1, 2, 3, or 4)" }
+                ]
+            }
+        },
+        "field_schema_rows": {
+            "type": "array",
+            "description": "List of field definition tuples: [Field_ID, Section_ID, Field_Label, Field_DataType, Default_Value, Tooltip_Help_Text, Validation_Operator, Validation_Param_Value, Dropdown_Options]",
+            "items": {
+                "type": "array",
+                "items": [
+                    { "type": "string", "description": "Field ID (Field_1_1, Field_1_2, Field_2_1...)" },
+                    { "type": "string", "description": "Section ID matching a SEC_N defined in section_rows" },
+                    { "type": "string", "description": "Field label heading displayed on PDF canvas" },
+                    { "type": "string", "enum": ["short_text", "long_text", "whole_number", "decimal", "choice", "multi_choice", "radio_choice", "date"] },
+                    { "type": "string", "description": "Default pre-populated value" },
+                    { "type": "string", "description": "Tooltip help text shown on hover" },
+                    { "type": "string", "enum": ["none", "min_length", "max_length", "=", "<", ">", "<=", ">=", "in_range", "out_range", "date_ddmmyyyy"] },
+                    { "type": "string", "description": "Validation parameter value (Required for min_length, max_length, in_range, comparison operators)" },
+                    { "type": "string", "description": "Comma-separated list of choices (Only required when Field_DataType is 'choice', 'multi_choice', or 'radio_choice')" }
+                ]
+            }
+        }
+    }
+}

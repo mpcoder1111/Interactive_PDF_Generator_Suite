@@ -1,0 +1,36 @@
+{
+    "form_settings": {
+        "Form_Title": "Employee_Information_Form",
+        "Form_Subtitle": "OFFICIAL EMPLOYEE DETAILS & RECORD FORM",
+        "Instruction_Point_1": "!! Save As - this PDF file before mailing. Cross-check whether all filled form data is properly saved before sending. !!",
+        "Instruction_Point_2": "!! Before saving the file Click 'Generate Summary' Button to update it..!!   !! Use Adobe Acrobat Reader software for filling this form. !!",
+        "Instruction_Point_3": "3. Verify all employee personal details & department info before generating summary.",
+        "Instruction_Point_4": "",
+        "Footer_Text": "Official Employee Information & Department Record Form",
+        "Default_Lock_Status": "Unlocked",
+        "Theme_Navy_Primary": "#1F4E78",
+        "Theme_Soft_Blue": "#DDEBF7",
+        "Theme_Soft_Yellow": "#FFF2CC",
+        "Summary_Section_Title": "GENERATE FORM SUMMARY & COPY TEXT",
+        "Summary_Button_Text": ">>>> Click the Button - To Generate Form Summary <<<<",
+        "Summary_Field_Label": "GENERATED FORM SUMMARY TEXT"
+    },
+    "section_rows": [
+        [1, "SEC_1", "1. EMPLOYEE PERSONAL DETAILS", "3"],
+        [2, "SEC_2", "2. DEPARTMENT & POSITION DETAILS", "3"],
+        [3, "SEC_3", "3. RESIDENTIAL ADDRESS & REMARKS", "1"]
+    ],
+    "field_schema_rows": [
+        ["Field_1_1", "SEC_1", "FULL NAME", "short_text", "", "Enter employee full legal name", "max_length", "100", ""],
+        ["Field_1_2", "SEC_1", "EMPLOYEE ID / BADGE NO", "short_text", "", "Enter official Employee ID or Badge number", "max_length", "50", ""],
+        ["Field_1_3", "SEC_1", "DATE OF BIRTH (DD-MM-YYYY)", "date", "", "Enter date of birth in DD-MM-YYYY format", "date_ddmmyyyy", "", ""],
+        ["Field_1_4", "SEC_1", "CONTACT PHONE NUMBER", "whole_number", "", "Enter 10-digit mobile contact number", ">=", "0", ""],
+        ["Field_1_5", "SEC_1", "OFFICIAL EMAIL ADDRESS", "short_text", "", "Enter company official email address", "max_length", "100", ""],
+        ["Field_2_1", "SEC_2", "DEPARTMENT NAME", "choice", "", "Select employee department", "none", "", "Operations, Engineering, Human Resources, Finance, IT & Systems, Sales & Marketing, Executive Management"],
+        ["Field_2_2", "SEC_2", "DESIGNATION / POSITION", "short_text", "", "Enter job designation or position title", "max_length", "100", ""],
+        ["Field_2_3", "SEC_2", "JOINING DATE (DD-MM-YYYY)", "date", "", "Enter company joining date in DD-MM-YYYY format", "date_ddmmyyyy", "", ""],
+        ["Field_2_4", "SEC_2", "MONTHLY BASIC SALARY ($)", "decimal", "", "Enter monthly basic salary in USD", ">=", "0.0", ""],
+        ["Field_3_1", "SEC_3", "RESIDENTIAL ADDRESS & REMARKS", "long_text", "", "Enter complete residential address and additional notes", "min_length", "10", ""],
+        ["Field_3_2", "SEC_3", "EMERGENCY CONTACT & PHONE", "short_text", "", "Enter emergency contact person name and telephone number", "max_length", "150", ""]
+    ]
+}

@@ -1,0 +1,18 @@
+# =========================================================================
+# Schema-Driven Interactive PDF Form Suite — Runtime Requirements
+# =========================================================================
+# Core Python dependencies required to RUN the application from source.
+# For building the standalone .exe, see requirements-dev.txt
+# =========================================================================
+
+# ReportLab PDF Engine (AcroForm Field Compilation, Canvas Drawing & PDF JavaScript Actions)
+reportlab>=5.0.0
+
+# Master Excel Configurator & Report Generator (.xlsx)
+openpyxl>=3.1.5
+
+# Native AcroForm Field Extraction & Form Data Consolidator
+pypdf>=5.0.0
+
+# Image Processing Library (Required by ReportLab Canvas)
+Pillow>=10.0.0

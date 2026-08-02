@@ -29,3 +29,6 @@ build/
 *.DS_Store
 Thumbs.db
 desktop.ini
+
+# Personal reference notes (not for public repo)
+GIT_PUSH_NOTES.txt

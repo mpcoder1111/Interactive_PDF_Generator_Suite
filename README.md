@@ -168,6 +168,9 @@ Developer-only (not required to run from source):
 ### 📊 Batch PDF Data Consolidator
 ![Batch PDF Consolidator](screenshots/gui_batch_consolidator.png)
 
+### 📄 Generated Fillable PDF Form (Adobe Reader)
+![Generated Fillable PDF Form](screenshots/Generated_fillable_pdf_file.png)
+
 ---
 
 ## 📄 Changelog
